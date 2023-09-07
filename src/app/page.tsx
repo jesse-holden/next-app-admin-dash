@@ -21,13 +21,15 @@ export default function Home() {
   async function create(formData: FormData) {
     'use server';
 
-    if (!formData.get('name')) {
+    const user_name = formData.get('name')?.toString().trim();
+
+    if (!user_name) {
       return { message: 'Invalid name.' };
     }
 
     try {
       // mutate
-      await addUser(formData.get('name') as string);
+      await addUser(user_name as string);
       // revalidate cache
       revalidatePath('/');
       return { message: 'Success!' };
