@@ -31,7 +31,7 @@ export const fakeDelay = (ms: number) => {
 
 export const randomDelay = () => {
   const max = 1000;
-  const min = 500;
+  const min = 200;
   const ms = Math.floor(Math.random() * (max - min + 1) + min);
   return fakeDelay(ms);
 };
