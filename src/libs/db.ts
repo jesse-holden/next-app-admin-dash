@@ -7,22 +7,15 @@ class DB {
 let db: DB;
 
 export const getDb = () => {
-  if (!db) {
-    db = new DB();
-    seedDb();
-  }
-
-  return db;
+  return (db = db ?? new DB());
 };
 
-export const resetDb = () => {
-  return (db = new DB());
-};
+export const resetDb = () => {};
 
-export const seedDb = () => {
+export const seedDb = async () => {
   const db = getDb();
-  db.user_repository.addUser(new User('John Doe'));
-  db.user_repository.addUser(new User('Jane Doe'));
+  await db.user_repository.addUser(new User('John Doe'));
+  await db.user_repository.addUser(new User('Jane Doe'));
 };
 
 export const fakeDelay = (ms: number) => {
