@@ -21,8 +21,8 @@ export const resetDb = () => {
 
 export const seedDb = () => {
   const db = getDb();
-  db.user_repository.addUser(new User(1, 'John Doe'));
-  db.user_repository.addUser(new User(2, 'Jane Doe'));
+  db.user_repository.addUser(new User('John Doe'));
+  db.user_repository.addUser(new User('Jane Doe'));
 };
 
 export const fakeDelay = (ms: number) => {

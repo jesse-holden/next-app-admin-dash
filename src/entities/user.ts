@@ -1,7 +1,12 @@
 import { randomDelay } from '@/libs/db';
 
+let id = 0;
+const force_unique_name = true;
 export class User {
-  constructor(public id: number, public name: string) {}
+  public id: number;
+  constructor(public name: string) {
+    this.id = ++id;
+  }
 }
 
 export class UserRepository {
@@ -19,7 +24,11 @@ export class UserRepository {
     return this.users.find((user) => user.name === name);
   }
 
-  public addUser(user: User): void {
+  public async addUser(user: User): Promise<void> {
+    await randomDelay();
+    if (force_unique_name && this.findUserByName(user.name)) {
+      throw new Error(`User with name ${user.name} already exists`);
+    }
     this.users.push(user);
   }
 
