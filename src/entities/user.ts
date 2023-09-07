@@ -38,6 +38,6 @@ export class UserRepository {
 
   public async findMany(): Promise<User[]> {
     await randomDelay();
-    return this.users;
+    return this.users.slice().sort((a, b) => a.id - b.id);
   }
 }
