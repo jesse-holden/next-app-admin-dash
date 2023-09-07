@@ -1,20 +1,20 @@
 import { randomDelay } from '@/libs/db';
 
-let id = 0;
+let _id = 0;
+
+const generateId = () => ++_id;
+
 const force_unique_name = true;
+
 export class User {
   public id: number;
   constructor(public name: string) {
-    this.id = ++id;
+    this.id = generateId();
   }
 }
 
 export class UserRepository {
-  users: User[] = [];
-
-  constructor(users: User[] = []) {
-    this.users = users;
-  }
+  constructor(private users: User[] = []) {}
 
   public findUserById(id: number): User | undefined {
     return this.users.find((user) => user.id === id);
