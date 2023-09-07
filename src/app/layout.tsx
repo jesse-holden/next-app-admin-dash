@@ -20,7 +20,9 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   if (!is_seeded) {
-    await seed();
+    await seed().catch((error) => {
+      // no-op
+    });
   }
 
   return (
