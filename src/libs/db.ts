@@ -1,5 +1,7 @@
 import { User, UserRepository } from '@/entities/user';
 
+let is_seeded = false;
+
 class DB {
   constructor(public user_repository = new UserRepository()) {}
 }
@@ -13,9 +15,11 @@ export const getDb = () => {
 export const resetDb = () => {};
 
 export const seedDb = async () => {
+  if (is_seeded) return;
   const db = getDb();
   await db.user_repository.addUser(new User('John Doe'));
   await db.user_repository.addUser(new User('Jane Doe'));
+  is_seeded = true;
 };
 
 export const fakeDelay = (ms: number) => {
